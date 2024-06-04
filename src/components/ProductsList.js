@@ -1,18 +1,10 @@
-import React, { useState } from "react";
-
-import CartButton from "./CartButton";
-import HomeButton from "./HomeButton";
 import useMyContext from "../useMyContext";
+import useFireStoreData from "../useFireStoreData";
+import NavigationBar from "./NavigationBar";
 
 const ProductsList = () => {
-  const [products, setProducts] = useState([
-    { id: 1, name: "Product 1", price: 400 },
-    { id: 2, name: "Product 2", price: 500 },
-    { id: 3, name: "Product 3", price: 600 },
-    { id: 4, name: "Product 4", price: 700 },
-  ]);
-  // const { updateProductCount, addProduct } = useContext(CartContext);
   const { updateProductCount, addProduct } = useMyContext();
+  const { data: products } = useFireStoreData();
 
   const handleAddToCartClick = (product) => {
     updateProductCount(1);
@@ -20,11 +12,8 @@ const ProductsList = () => {
   };
 
   return (
-    <>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <HomeButton />
-        <CartButton />
-      </div>
+    <div>
+      <NavigationBar />
       <div>
         {products.map((product, index) => (
           <div style={{ display: "flex", margin: "50px", padding: "10px" }}>
@@ -44,7 +33,7 @@ const ProductsList = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

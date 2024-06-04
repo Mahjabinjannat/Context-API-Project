@@ -71,6 +71,11 @@ function ContextProvider({ children }) {
     return totalPrice;
   };
 
+  const resetCart = () => {
+    setProductCount(0);
+    setCartProducts([]);
+  };
+
   return (
     <div>
       <CartContext.Provider
@@ -81,6 +86,7 @@ function ContextProvider({ children }) {
           updateProductCount,
           removeProduct,
           handleTotalPrice,
+          resetCart,
         }}
       >
         {children}

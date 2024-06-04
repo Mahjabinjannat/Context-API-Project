@@ -1,15 +1,42 @@
-import CartButton from "./CartButton";
-import HomeButton from "./HomeButton";
-
 import useMyContext from "../useMyContext";
+import { collection, doc, setDoc } from "firebase/firestore";
+import db from "..";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import NavigationBar from "./NavigationBar";
 
+/*
+order{
+  productName
+  productQuantity
+  unit price
+  total price
+}[]
+
+order{
+  products: [
+
+  ], 
+  totalPrice, 
+  totalQuantity
+  address,
+  contact info,
+  user ino,
+  
+}
+
+
+*/
 const ShowCartItem = () => {
+  const [isSaving, setIsSaving] = useState(false);
+  const navigate = useNavigate();
   const {
     cartProducts,
     addProduct,
     updateProductCount,
     removeProduct,
     handleTotalPrice,
+    resetCart,
   } = useMyContext();
 
   const handleAddToCartClick = (product) => {
@@ -22,12 +49,37 @@ const ShowCartItem = () => {
     removeProduct(product);
   };
 
+  const addToDb = async () => {
+    try {
+      setIsSaving(true);
+      const order = { products: [], totalPrice: 0, totalQuantity: 0 };
+      let totalQuantity = 0;
+      let totalPrice = 0;
+      for (let i = 0; i < cartProducts.length; i += 1) {
+        order.products.push(cartProducts[i]);
+        totalQuantity = totalQuantity + cartProducts[i].quantity;
+        totalPrice =
+          totalPrice + cartProducts[i].quantity * cartProducts[i].price;
+      }
+      order.totalPrice = totalPrice;
+      order.totalQuantity = totalQuantity;
+      console.log(order);
+
+      const newOrderRef = doc(collection(db, "orders"));
+      await setDoc(newOrderRef, order);
+      console.log("order created successfully!");
+      resetCart();
+      navigate("/");
+    } catch (e) {
+      console.log("failed ", e);
+    }
+    setIsSaving(false);
+  };
+
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <HomeButton />
-        <CartButton />
-      </div>
+      <NavigationBar />
+      {cartProducts.length === 0 && <h3>Add Products to Cart!</h3>}
       {cartProducts.length > 0 && (
         <table
           style={{
@@ -99,6 +151,21 @@ const ShowCartItem = () => {
         <div style={{ padding: "10px", margin: "15px", fontSize: "25px" }}>
           Total: {handleTotalPrice()}
         </div>
+      )}
+
+      {cartProducts.length > 0 && (
+        <button
+          style={{
+            padding: "10px",
+            width: "150px",
+            cursor: "pointer",
+            margin: "25px",
+          }}
+          disabled={isSaving}
+          onClick={addToDb}
+        >
+          Place Order
+        </button>
       )}
     </div>
   );
