@@ -7,12 +7,7 @@ const CartButton = () => {
 
   const handleCartClick = () => {};
   return (
-    <div
-      style={{
-        marginRight: "70px",
-      }}
-      onClick={handleCartClick}
-    >
+    <div onClick={handleCartClick}>
       <Link to="/cartItem">Cart({productCount})</Link>
     </div>
   );
