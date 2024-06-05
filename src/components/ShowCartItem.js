@@ -69,7 +69,7 @@ const ShowCartItem = () => {
       await setDoc(newOrderRef, order);
       console.log("order created successfully!");
       resetCart();
-      navigate("/");
+      navigate("/my-orders");
     } catch (e) {
       console.log("failed ", e);
     }

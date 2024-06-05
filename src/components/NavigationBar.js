@@ -22,7 +22,7 @@ const NavigationBar = () => {
       >
         <CartButton />
 
-        <Link to="/myOrders">My Orders</Link>
+        <Link to="/my-orders">My Orders</Link>
       </div>
     </div>
   );

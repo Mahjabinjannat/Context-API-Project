@@ -8,7 +8,7 @@ const CartButton = () => {
   const handleCartClick = () => {};
   return (
     <div onClick={handleCartClick}>
-      <Link to="/cartItem">Cart({productCount})</Link>
+      <Link to="/cart-item">Cart({productCount})</Link>
     </div>
   );
 };

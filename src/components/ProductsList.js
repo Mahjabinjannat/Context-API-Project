@@ -1,9 +1,10 @@
 import useMyContext from "../useMyContext";
 import useFireStoreData from "../useFireStoreData";
 import NavigationBar from "./NavigationBar";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProductsList = () => {
+  const navigate = useNavigate();
   const { updateProductCount, addProduct } = useMyContext();
   const { data: products } = useFireStoreData();
 
@@ -23,8 +24,9 @@ const ProductsList = () => {
           marginLeft: "60px",
           cursor: "pointer",
         }}
+        onClick={() => navigate("/add-product")}
       >
-        <Link to="/addProduct">Add Product</Link>
+        Add Product
       </button>
       <div>
         {products.map((product, index) => (
