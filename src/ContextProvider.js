@@ -11,7 +11,7 @@ function ContextProvider({ children }) {
   const [cartProducts, setCartProducts] = useState([]);
 
   const addProduct = (product) => {
-    setCartProducts((prevstate) => {
+    setCartProducts(() => {
       let newArr = [];
       for (let i = 0; i < cartProducts.length; i += 1) {
         if (cartProducts[i].id === product.id) {

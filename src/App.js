@@ -13,11 +13,11 @@ function App() {
       <ContextProvider>
         <Router>
           <Routes>
-            <Route exact path="/cartItem" element={<ShowCartItem />}></Route>
-            <Route exact path="/myOrders" element={<OrderHistory />}></Route>
+            <Route exact path="/cart-item" element={<ShowCartItem />}></Route>
+            <Route exact path="/my-orders" element={<OrderHistory />}></Route>
             <Route exact path="/" element={<Home />}></Route>
             <Route exact path="/products" element={<Home />}></Route>
-            <Route exact path="/addProduct" element={<AddProduct />}></Route>
+            <Route exact path="/add-product" element={<AddProduct />}></Route>
           </Routes>
         </Router>
       </ContextProvider>
