@@ -1,6 +1,7 @@
 import useMyContext from "../useMyContext";
 import useFireStoreData from "../useFireStoreData";
 import NavigationBar from "./NavigationBar";
+import { Link } from "react-router-dom";
 
 const ProductsList = () => {
   const { updateProductCount, addProduct } = useMyContext();
@@ -14,6 +15,17 @@ const ProductsList = () => {
   return (
     <div>
       <NavigationBar />
+      <button
+        style={{
+          width: "100px",
+          padding: "10px",
+          margin: "20px",
+          marginLeft: "60px",
+          cursor: "pointer",
+        }}
+      >
+        <Link to="/addProduct">Add Product</Link>
+      </button>
       <div>
         {products.map((product, index) => (
           <div style={{ display: "flex", margin: "50px", padding: "10px" }}>
@@ -24,6 +36,7 @@ const ProductsList = () => {
             >
               {product.name}
             </div>
+            <div style={{ padding: "10px" }}>Price: {product.price} </div>
             <button
               style={{ padding: "10px", width: "150px", cursor: "pointer" }}
               onClick={() => handleAddToCartClick(product)}
