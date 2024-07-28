@@ -31,14 +31,20 @@ const ProductsList = () => {
       <div>
         {products.map((product, index) => (
           <div style={{ display: "flex", margin: "50px", padding: "10px" }}>
-            <div
-              key={index}
-              style={{ width: "150px", padding: "10px" }}
-              id="product"
-            >
+            <div key={index} style={{ width: "150px", padding: "10px" }}>
               {product.name}
             </div>
             <div style={{ padding: "10px" }}>Price: {product.price} </div>
+            <div
+              key={index}
+              style={{ width: "150px", height: "150px", padding: "10px" }}
+            >
+              <img
+                src={product.downloadLink}
+                alt=""
+                style={{ height: "100%", width: "100%", objectFit: "contain" }}
+              />
+            </div>
             <button
               style={{ padding: "10px", width: "150px", cursor: "pointer" }}
               onClick={() => handleAddToCartClick(product)}
