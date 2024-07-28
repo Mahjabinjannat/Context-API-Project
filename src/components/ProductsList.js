@@ -12,7 +12,7 @@ const ProductsList = () => {
     updateProductCount(1);
     addProduct(product);
   };
-
+  console.log("Test");
   return (
     <div>
       <NavigationBar />
